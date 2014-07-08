@@ -8,7 +8,7 @@ import sys
 from {{ project_name }} import __versionstr__
 from {{ project_name }}.settings.base import *
 
-SERVER_CONFIGURATION_FILE = '/usr/local/etc/sanoma/{{ project_name }}/'
+SERVER_CONFIGURATION_FILE = '/usr/local/etc/pyconfs/{{ project_name }}/'
 
 # server-specific settings
 sys.path.insert(0, SERVER_CONFIGURATION_FILE)

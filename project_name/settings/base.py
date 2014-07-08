@@ -60,13 +60,16 @@ USE_L10N = True
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
 
+DATE_FORMAT = 'j. n. Y'
+
+DATETIME_FORMAT = '%s %s' % (DATE_FORMAT, 'H:i')
+
 # Media and static settings, development
 MEDIA_ROOT = join(DEV_TMP_DIR, 'media')
 MEDIA_URL = '/media/'
 
 STATIC_ROOT = join(DEV_TMP_DIR, 'static')
 STATIC_URL = '/static/'
-COMMON_STATIC_URL = 'http://static.common.vlp.cz/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -74,6 +77,11 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+)
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
 )
 
 # NOTE: development settings, use real secret key in your production
@@ -92,7 +100,7 @@ MIDDLEWARE_CLASSES = (
     #'django.middleware.locale.LocaleMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'raven.contrib.django.middleware.SentryResponseErrorIdMiddleware',
+    #'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
 )
 
 ROOT_URLCONF = '{{ project_name }}.urls'
@@ -119,10 +127,13 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
+
+    #'grappelli.dashboard',
+    #'grappelli',
     'django.contrib.admin',
 
     'south',
-    'raven.contrib.django',
+
     #'taggit',
 
     '{{ project_name }}',
@@ -131,14 +142,14 @@ INSTALLED_APPS = (
 )
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
-
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 365
 SESSION_COOKIE_DOMAIN = ''
 
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
     'root': {
-        'handlers': ['file', 'sentry'],
+        'handlers': ['file'],
         'level': 'WARNING',
     },
     'formatters': {
@@ -161,12 +172,11 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'default',
         },
-        'sentry': {
-            'level': 'ERROR',
-            'class': 'raven.contrib.django.handlers.SentryHandler',
-        },
     },
 }
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 #THUMBNAIL_ORIENTATION = False
+
+# GRAPPELLI_ADMIN_TITLE = "{{ project_name }} admin %s" % PROJECT_VERSION
+# GRAPPELLI_INDEX_DASHBOARD = '{{ project_name }}.dashboard.CustomIndexDashboard'

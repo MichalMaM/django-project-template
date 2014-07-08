@@ -19,13 +19,13 @@ SESSION_COOKIE_DOMAIN = ''
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 _DATABASES ={
-#     'pgsql': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': '{{ project_name }}',
-#         'USER': '',
-#         'PASSWORD': '',
-#         'HOST': 'localhost',
-#     },
+    'pgsql': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': '{{ project_name }}',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+    },
 }
 
 CACHES.update({
@@ -35,14 +35,6 @@ CACHES.update({
 })
 
 LOGGING['root']['handlers'] = ['console']
-#LOGGING.setdefault('loggers', {})['django.db.backends'] = {'level': 'DEBUG', 'handers': ['console'], }
-
-# For development without ElasticSearch, you can uncomment following lines to avoid some errors
-#HAYSTACK_CONNECTIONS = {
-#    'default': {
-#        'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
-#    },
-#}
 
 if DEBUG_TOOLBAR:
     import cache_toolbar.panels.redis

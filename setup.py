@@ -1,18 +1,21 @@
 from os import system
 from os.path import dirname, join
-from setuptools import setup, find_packages
+from setuptools import setup
 from distutils.core import Command
 import {{ project_name }}
 
 install_requires = [
-    #'uwsgi==2.0.5.1',
-    'gunicorn 18.0'
+    'uwsgi==2.0.6'
 ]
+
 with open(join(dirname(__file__), 'requirements.txt')) as req_file:
     for l in req_file.readlines():
         l = l.strip()
-        if l and not l.startswith('#'):
+        if l and not l.startswith('#') and not 'git+' in l:
             install_requires.append(l)
+
+#append what you want
+#install_requires.append('ella-galleries==1.0.3')
 
 tests_require = [
     'nose',
@@ -78,7 +81,6 @@ class MakeStatic(Command):
     def run(self):
         params = {
             'pth': '{{ project_name }}/project_static',
-            #'lessc_opts': '--yui-compress --verbose -O2',
             'lessc_opts': '--compress --clean-css --verbose -O2',
             'xjs_opts': ''
         }
@@ -91,17 +93,14 @@ setup(
     version={{ project_name }}.__versionstr__,
     description='%(repo_name)s',
     long_description=long_description,
-    author='Astrosat Media Online Dev',
-    author_email='online-dev@astrosatmedia.cz',
-    maintainer='Michal Dub',
-    maintainer_email='Michal.Dub@astrosatmedia.cz',
+    author='Lenka Zahourova',
+    author_email='lenkazahourova@seznam.cz',
+    maintainer='Lenka Zahourova',
+    maintainer_email='lenkazahourova@seznam.cz',
     license='Proprietal',
     #url='',
 
-    packages=find_packages(
-        where='.',
-        exclude=('docs', 'tests',)
-    ),
+    packages=('{{ project_name }}',),
     include_package_data=True,
 
     cmdclass={

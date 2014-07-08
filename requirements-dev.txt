@@ -6,4 +6,4 @@ django-debug-toolbar
 https://github.com/WoLpH/Cache-Debug-Toolbar/archive/master.zip#egg=cache_toolbar
 pip-tools
 
-git+ssh://gitolite@git.smdev.cz/sm-deployment#egg=sm-deployment
+#path to deployment package

@@ -1,12 +1,11 @@
 Django>=1.6,<1.7
 south==0.8.4
-Pillow==2.4.0
-raven==5.0.0
+Pillow==2.5.0
 
 hiredis
 redis==2.10.1
 django-redis==3.6.2
-django-taggit==0.12
+#django-taggit==0.12
 sorl-thumbnail==11.12
 markdown2==2.2.1
 templatefinder

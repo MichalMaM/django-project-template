@@ -15,7 +15,7 @@ if [ "$1" = "first" ] || [ "$1" = "firstrun" ]; then
 fi
 
 if [ ! $1 ]; then
-	pip install -r ./requirements-dev.txt --extra-index-url http://pypi.smdev.cz/simple/
+	pip install -r ./requirements-dev.txt
 	python manage.py syncdb --noinput
 	python manage.py migrate
 fi
