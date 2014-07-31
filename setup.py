@@ -128,9 +128,5 @@ setup(
     test_suite='nose.collector',
     tests_require=tests_require,
     setup_requires=setup_requires,
-    entry_points={
-        'console_scripts': [
-            '{{ project_name }}_manage = {{ project_name }}.custom_manage:main',
-        ],
-    },
+    scripts=['manage.py'],
 )

@@ -20,8 +20,6 @@ class Project(BaseProject):
 
     git_clone_url = 'ssh://git@bitbucket.org/michalmam/%(repo_name)s.git'
 
-    global_entry_points = ['{{ project_name }}_manage']
-
 
 class Deployment(BaseDeployment, VPSMachine, Project):
     pass
